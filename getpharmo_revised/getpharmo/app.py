@@ -14,7 +14,7 @@ db = MySQLdb.connect(
     user="root",
     password="DVsOPclxRZZAqcfmOpnRCgfQDTmxLTlc",
     database="railway"
-))
+)
 
 
 @app.route('/', methods=['GET', 'POST'])

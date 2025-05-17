@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Getpharmo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logologo.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-blue: #0d6e8c;
+            --teal-accent: #00b4b3;
+            --off-white: #f8f9fa;
+            --light-gray: #e9ecef;
+            --medium-gray: #adb5bd;
+            --dark-gray: #495057;
+            --text-color: #212529;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --primary-color: #00A4A6;
+            --secondary-color: #E6F7F7;
+            --accent-color: #008486;
+            --hover-color: #007274;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0f7fa 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            transition: all var(--transition-normal);
+            position: relative;
+        }
+
+        a:hover {
+            color: var(--teal-accent);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+            height: 100px;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            padding: 0 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-md);
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo {
+            width: 220px;
+            height: auto;
+            max-height: 220px;
+            object-fit: contain;
+            transition: all var(--transition-normal);
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .desktop-nav a {
+            color: var(--dark-gray);
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .desktop-nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--teal-accent);
+            transition: none;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--teal-accent);
+        }
+
+        .desktop-nav a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-blue);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: var(--transition-fast);
+        }
+
+        .hamburger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+            top: 8px;
+        }
+
+        .hamburger span:nth-child(3) {
+            top: 16px;
+        }
+
+        .mobile-menu-open .hamburger span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+
+        .mobile-menu-open .hamburger span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .mobile-menu-open .hamburger span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%; /* Changed from right: -100% to match previous files */
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: white;
+            z-index: 2000; /* Increased to match previous files */
+            padding: 4rem 2rem 2rem; /* Adjusted to accommodate close button */
+            box-shadow: var(--shadow-lg);
+            transition: left var(--transition-normal); /* Changed from right to left */
+        }
+
+        .mobile-menu-open .mobile-nav {
+            left: 0; /* Changed from right: 0 to match previous files */
+        }
+
+        .mobile-nav .close-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .mobile-nav .close-button:hover {
+            background-color: var(--medium-gray);
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav .close-button::before,
+        .mobile-nav .close-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: var(--dark-gray);
+        }
+
+        .mobile-nav .close-button::before {
+            transform: rotate(45deg);
+        }
+
+        .mobile-nav .close-button::after {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            font-weight: 600;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase; /* Added to match previous files */
+            text-decoration: none; /* Added to ensure consistency */
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            color: var(--teal-accent);
+        }
+
+        .mobile-nav a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--teal-accent);
+        }
+
+        /* Main content container */
+        .container.main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 120px; /* Adjusted for desktop to account for 100px header */
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            position: relative;
+            z-index: 500;
+        }
+
+        /* Image section styles */
+        .image-section {
+            flex: 1;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .founder-image {
+            width: 100%;
+            max-width: 550px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 122, 138, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .founder-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 122, 138, 0.3);
+        }
+
+        /* Content section styles */
+        .content-section {
+            flex: 1;
+        }
+
+        /* Content styles */
+        .content {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-text {
+            max-width: 800px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        h1:hover::after {
+            width: 100px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.8;
+            transition: transform 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        p:hover {
+            transform: translateX(10px);
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding: 0 4px;
+        }
+
+        strong::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        strong:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: auto;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-logo img {
+            width: 150px; /* Added to match previous files */
+            height: auto;
+        }
+
+        .footer-logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .link-group h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 0.9rem;
+        }
+
+        .link-group a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all var(--transition-fast);
+            padding-bottom: 2px;
+            text-decoration: none; /* Added to ensure consistency */
+        }
+
+        .link-group a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--teal-accent);
+            transition: width var(--transition-normal);
+        }
+
+        .link-group a:hover {
+            color: var(--teal-accent);
+        }
+
+        .link-group a:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: flex-end;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-normal);
+            will-change: transform;
+        }
+
+        .social-icon:hover {
+            background-color: var(--teal-accent);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 180, 179, 0.3);
+        }
+
+        .social-icon img {
+            width: 22px;
+            height: 22px;
+            filter: brightness(0) invert(1);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 1rem;
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .copyright p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-variant: small-caps;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .container.main-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .image-section, .content-section {
+                width: 100%;
+            }
+
+            .founder-image {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+
+            h1::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-logo {
+                grid-column: 1 / -1;
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .social-links {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 992px) {
+            html {
+                font-size: 15px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+
+            body {
+                padding-top: 0; /* Removed to avoid redundancy with container padding */
+            }
+
+            header {
+                height: 80px;
+                background-color: rgba(255, 255, 255, 0.9); /* Added semi-transparent background for mobile */
+            }
+
+            header .container {
+                flex-direction: row; /* Ensure hamburger on left, logo on right */
+                justify-content: space-between;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                order: 1;
+            }
+
+            .logo {
+                order: 2;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .header-logo {
+                width: 120px;
+            }
+
+            .container.main-content {
+                padding: 1rem;
+                padding-top: 90px; /* Adjusted for mobile to account for 80px header */
+                min-height: calc(100vh - 80px);
+            }
+
+            .content {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                justify-content: center;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                font-size: 13px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+        }
+
+        /* Remove White Space */
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        footer *:last-child {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+            border-bottom: none !important;
+        }
+
+        html {
+            background-color: var(--primary-blue); /* Added to match footer background */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="mobile-menu-toggle">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="logo">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/image.png') }}" alt="Getpharmo Logo" class="header-logo">
+                </a>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="{{ url_for('index') }}" class="active">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About us</a></li>
+                    <li><a href="{{ url_for('index') }}">Services</a></li>
+                    <li><a href="{{ url_for('index') }}">Gallery</a></li>
+                    <li><a href="{{ url_for('index') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('index') }}">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+        <div class="close-button"></div>
+        <ul>
+            <li><a href="{{ url_for('index') }}" class="active">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About us</a></li>
+            <li><a href="{{ url_for('index') }}">Services</a></li>
+            <li><a href="{{ url_for('index') }}">Gallery</a></li>
+            <li><a href="{{ url_for('index') }}">Pricing</a></li>
+            <li><a href="{{ url_for('index') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="image-section animate_animated animate_fadeInLeft">
+            <img src="{{ url_for('static', filename='images/FOUNDER.jpg') }}" alt="Founder" class="founder-image">
+        </div>
+        <div class="content-section animate_animated animate_fadeInRight">
+            <main class="content">
+                <div class="about-text">
+                    <h1>About Getpharmo</h1>
+                    <p>
+                        We are India's first <strong>Medication Opinion Centre</strong>, revolutionizing the way patients receive medication feedback—an area where India has yet to catch up. Backed by <strong>qualified Doctors of Pharmacy</strong>, Getpharmo is on a mission to become the world's leading medication consultancy.
+                    </p>
+                    
+                    <p>
+                        In today's fast-evolving healthcare landscape, we bridge the gap between <strong>security and accessibility</strong>. Our platform ensures medical records are not only <strong>highly secure</strong> but also <strong>effortlessly accessible</strong>, empowering both patients and providers.
+                    </p>
+                    
+                    <p>
+                        Founded by <strong>healthcare professionals and security experts</strong>, we uphold the <strong>highest standards of data protection</strong>, making healthcare access seamless, reliable, and future-ready.
+                    </p>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='images/image.png') }}" alt="Getpharmo Logo">
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#home">About Us</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                            <li><a href="#contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Data Protection</a></li>
+                            <li><a href="#">Compliance</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">System Status</a></li>
+                            <li><a href="#">Report an Issue</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><img src="{{ url_for('static', filename='images/facebook-icon.svg') }}" alt="Facebook"></a>
+                    <a href="#" class="social-icon"><img src="{{ url_for('static', filename='images/twitter-icon.svg') }}" alt="Twitter"></a>
+                    <a href="#" class="social-icon"><img src="{{ url_for('static', filename='images/linkedin-icon.svg') }}" alt="LinkedIn"></a>
+                    <a href="#" class="social-icon"><img src="{{ url_for('static', filename='images/instagram-icon.svg') }}" alt="Instagram"></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 Getpharmo Pharmacology Clinic. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Toggle Mobile Menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            mobileMenuToggle.addEventListener('click', function() {
+                document.body.classList.toggle('mobile-menu-open');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('.mobile-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    document.body.classList.remove('mobile-menu-open');
+                });
+            });
+
+            // Close mobile menu when clicking the close button
+            document.querySelector('.mobile-nav .close-button').addEventListener('click', function() {
+                document.body.classList.remove('mobile-menu-open');
+            });
+        });
+
+        (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939f0a957c7eafc2',t:'MTc0NjI2Nzc4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+    </script>
+</body>
+</html>

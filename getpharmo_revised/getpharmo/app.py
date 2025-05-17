@@ -4,10 +4,9 @@ import pymysql
 pymysql.install_as_MySQLdb()  # Install PyMySQL as MySQLdb
 import MySQLdb  # Import MySQLdb after installation
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 # MySQL Database Connection using MySQLdb
-
 db = MySQLdb.connect(
     host="caboose.proxy.rlwy.net",
     port=47094,
@@ -15,7 +14,6 @@ db = MySQLdb.connect(
     password="DVsOPclxRZZAqcfmOpnRCgfQDTmxLTlc",
     database="railway"
 )
-
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -49,9 +47,11 @@ def home():
             error_message = "Please fill in all required fields."
 
     return render_template('index.html', success_message=success_message, error_message=error_message)
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -59,10 +59,10 @@ def about():
 @app.route('/services')
 def services():
     return render_template('servicesmid.html')
+
 @app.route('/services-right')
 def services_right():
     return render_template('servicesright.html')
-
 
 @app.route('/services-left')
 def services_left():
@@ -75,10 +75,10 @@ def nine_nine_nine():
 @app.route('/one-nine-nine-nine')
 def one_nine_nine_nine():
     return render_template('1999.html')
+
 @app.route('/two-nine-nine-nine')
 def two_nine_nine_nine():
     return render_template('2999.html')
 
-
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
